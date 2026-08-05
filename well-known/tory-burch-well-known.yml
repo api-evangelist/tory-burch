@@ -1,0 +1,142 @@
+generated: '2026-08-05'
+method: probed
+source: live probes of /.well-known/ and contract-discovery paths on Tory Burch hosts
+result: >-
+  one hit. Tory Burch publishes no /.well-known/ document of any kind, but it does serve a
+  real site-wide /llms.txt (HTTP 200, text/plain, 882,533 bytes) from the storefront apex.
+  No OpenAPI, Swagger, GraphQL SDL, AsyncAPI or MCP surface exists on any host.
+hosts:
+- host: https://www.toryburch.com
+  platform: >-
+    Next.js front end behind Akamai (Akamai Bot Manager _abck/bm_sz cookies present) over a
+    Salesforce Commerce Cloud / Demandware commerce platform, with Adobe Scene7 media on
+    s7.toryburch.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    note: >-
+      HTML 404 page (text/html, 161,498 bytes), not a machine-readable miss. No security
+      contact is published at the RFC 9116 location.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+    note: >-
+      the pre-0.3 legacy A2A path was probed as well as the canonical one. Both miss, so no
+      a2a/ artifact is written and no AgentCard pointer is wired.
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain; charset=UTF-8
+    bytes: 882533
+    file: ../llms/tory-burch-llms.txt
+    note: >-
+      GENUINE HIT, control-verified. A request for /llms-does-not-exist-xyz123.txt returned
+      301 rather than 200, so this is a real origin document and not a soft-200 catch-all.
+      Content is an SEO-style content inventory ("Tory Burch - Complete Web Content
+      Analysis", analysis date 3/20/2026) covering 778 storefront pages across 10
+      categories - regional homepages, About, Product, Contact and Other. It is a marketing
+      and retail-catalog index, NOT developer documentation: it names no API, endpoint,
+      authentication scheme or SDK.
+  - path: /llms-full.txt
+    status: 301
+  - path: /openapi.json
+    status: 301
+    note: locale redirect to /en-us/openapi.json, which then returns 404
+  - path: /openapi.yaml
+    status: 301
+  - path: /swagger.json
+    status: 301
+  - path: /api-docs
+    status: 301
+    note: locale redirect to /en-us/api-docs, which then returns 404
+  - path: /graphql
+    status: 301
+    note: locale redirect to /en-us/graphql, which then returns 404 (HTML)
+  - path: /robots.txt
+    status: 200
+    note: >-
+      185 bytes. Disallows /*?q=* and */favorites/*, allows TagInspector, sets a crawl-delay
+      for Pinterestbot, and points at https://www.toryburch.com/sitemap_index.xml. Carries
+      no AI-crawler block list and does not disallow /llms.txt.
+  - path: /sitemap.xml
+    status: 301
+- host: https://toryburch.com
+  note: apex 301-redirects to www on every path probed
+- host: https://www.toryburchfoundation.org
+  note: >-
+    affiliated non-profit, probed for completeness. /.well-known/security.txt and
+    /.well-known/agent-card.json both 404; /llms.txt 301s. No API surface.
+hosts_that_do_not_resolve:
+- api.toryburch.com
+- docs.toryburch.com
+- developer.toryburch.com
+- developers.toryburch.com
+- apis.toryburch.com
+- dev.toryburch.com
+- app.toryburch.com
+- portal.toryburch.com
+- mcp.toryburch.com
+- status.toryburch.com
+- shop.toryburch.com
+- secure.toryburch.com
+api_gateway_observed:
+  vendor: Apigee (Google Cloud Apigee Edge)
+  path: https://www.toryburch.com/api/
+  evidence: >-
+    every path under /api/ returns HTTP 404 with content-type application/json and an Apigee
+    routing fault body, e.g. GET /api/graphql ->
+    {"fault":{"faultstring":"Unable to identify proxy for host: secure and url: /graphql",
+    "detail":{"errorcode":"messaging.adaptors.http.flow.ApplicationNotFound"}}}
+  virtual_host: secure
+  interpretation: >-
+    Tory Burch does run a real API gateway, but it is a private first-party storefront
+    gateway. The ApplicationNotFound fault means no proxy is registered at any of the
+    probed paths (/api/, /api/v1, /api/graphql, /api/openapi.json, /api/prod-r2). No proxy
+    catalog, no reference and no specification is published for it, and no credentials are
+    obtainable by the public. It is recorded here as an observed platform fact only - it is
+    NOT registered as an API in apis.yml, because no callable public contract exists.
+contract_discovery:
+  openapi: >-
+    not found. Probed /openapi.json, /openapi.yaml, /swagger.json, /api-docs, /docs and
+    /redoc on the storefront apex, on the /en-us locale root and on the Apigee /api/ path
+    prefix. Every candidate returned a 301 locale redirect terminating in an HTML 404, or an
+    Apigee ApplicationNotFound JSON fault. No response parsed as OpenAPI or Swagger.
+  graphql: >-
+    not found. /graphql, /graphql/ and /en-us/graphql return HTML 404s from Next.js;
+    /api/graphql returns the Apigee ApplicationNotFound fault. There is no GraphQL surface
+    to introspect, so no introspection query was issued and no SDL is recorded.
+  mcp: >-
+    not found. No mcp.toryburch.com host resolves, no hosted or remote MCP server is
+    advertised anywhere on the site or in the llms.txt, and no tools/list endpoint exists to
+    call.
+  asyncapi: >-
+    not found. No event, streaming or webhook surface is documented anywhere on the public
+    site.
+  a2a_agent_card: >-
+    not found. Both /.well-known/agent-card.json and the legacy /.well-known/agent.json
+    return 404 on www.toryburch.com and on the foundation host. Per the pipeline contract an
+    agent card is search-only and is never authored on a provider's behalf, so no a2a/
+    directory is created and no AgentCard pointer is wired.
+  conclusion: >-
+    Tory Burch publishes exactly one machine-readable artifact - a retail-content llms.txt -
+    and no API contract of any kind. This is a completed negative result on the contract
+    hunt, not an unfinished probe.
+x-evidence:
+  fetched: '2026-08-05'
+  method: >-
+    curl GET with a desktop browser user-agent, redirect-following where noted, 15-25s
+    timeouts, against the apex, www and locale roots
+  dns_method: dig +short A on candidate API/docs/status subdomains
+  soft_404_control: >-
+    https://www.toryburch.com/llms-does-not-exist-xyz123.txt returned 301 (not 200),
+    confirming the /llms.txt 200 is a real document rather than a catch-all response

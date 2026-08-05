@@ -1,8 +1,22 @@
 aid: tory-burch
 name: Tory Burch
-description: 'Tory Burch is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Tory Burch LLC is an American luxury women''s fashion label founded in
+  February 2004 by designer Tory Burch and headquartered in New York City, trading under
+  the legal entity River Light V, L.P. The privately held company designs and sells
+  ready-to-wear clothing, designer shoes, handbags, small leather goods, jewellery, watches,
+  eyewear, fragrance and beauty, swimwear and home decor, together with the Tory Sport
+  activewear line, through roughly 400 boutiques worldwide, wholesale partners and a
+  direct-to-consumer storefront at toryburch.com serving the United States, United Kingdom,
+  the European Union and Asia. Its affiliated Tory Burch Foundation funds and educates
+  women entrepreneurs. Tory Burch is a fashion and retail business rather than a software
+  vendor: it operates no developer program, publishes no API documentation, SDKs or
+  machine-readable API contract, and holds no public GitHub organisation. Its storefront
+  is a Next.js front end on Akamai over a Salesforce Commerce Cloud (Demandware) commerce
+  platform with Adobe Scene7 media, and an Apigee API gateway fronts www.toryburch.com/api/
+  for first-party storefront traffic only, exposing no publicly registered proxy. The
+  one machine-readable artifact the company does publish is a site-wide llms.txt.'
 url: https://raw.githubusercontent.com/api-evangelist/tory-burch/refs/heads/main/apis.yml
+image: https://s7.toryburch.com/is/image/ToryBurch/medallion-navy@2x.1200x1200.jpg
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
@@ -12,12 +26,87 @@ created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
+- Fashion
+- Luxury Goods
+- Apparel
+- Footwear
+- Handbags and Accessories
+- Retail
+- Ecommerce
+- Direct to Consumer
+- Consumer Brands
+- United States
 apis: []
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-08-05'
+  status: minimal
+  artifacts_added: 5
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: >-
+    Tory Burch is a luxury fashion retailer whose product is physical goods; the only
+    machine-readable document it serves is a retail-content llms.txt indexing 778 storefront
+    pages, and the Apigee gateway behind www.toryburch.com/api/ answers every probed path
+    with an ApplicationNotFound fault because no public proxy is registered on it.
+  evidence:
+  - url: https://www.toryburch.com/llms.txt
+    status: 200
+  - url: https://www.toryburch.com/api/graphql
+    status: 404
+  - url: https://www.toryburch.com/openapi.json
+    status: 301
+  - url: https://www.toryburch.com/.well-known/agent-card.json
+    status: 404
+  - url: https://api.github.com/orgs/toryburch
+    status: 404
+  checked: '2026-08-05'
 common:
+- type: DomainSecurity
+  url: security/tory-burch-domain-security.yml
+- type: WellKnown
+  url: well-known/tory-burch-well-known.yml
+- type: Packages
+  url: packages/tory-burch-packages.yml
+- type: Conformance
+  url: conformance/tory-burch-conformance.yml
+- type: LLMsTxt
+  url: llms/tory-burch-llms.txt
 - type: Website
+  url: https://www.toryburch.com/en-us/
+- type: About
+  url: https://www.toryburch.com/en-us/about-us/
+- type: Support
+  url: https://www.toryburch.com/en-us/client-services/
+- type: HelpCenter
+  url: https://www.toryburch.com/en-us/client-services/
+- type: PrivacyPolicy
+  url: https://www.toryburch.com/en-us/customer-services/privacy-policy/
+- type: TermsOfService
+  url: https://www.toryburch.com/en-us/terms-of-use/content-terms-and-conditions/
+- type: Locations
+  url: https://www.toryburch.com/en-us/stores/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/tory-burch
+- type: Instagram
+  url: https://www.instagram.com/toryburch
+- type: Facebook
+  url: https://www.facebook.com/toryburch
+- type: Twitter
+  url: https://twitter.com/toryburch
+- type: YouTube
+  url: https://www.youtube.com/toryburch
+- type: Pinterest
+  url: https://pinterest.com/ToryBurch
+- type: Wikipedia
+  url: https://en.wikipedia.org/wiki/Tory_Burch_LLC
+- type: Foundation
+  url: https://www.toryburchfoundation.org/
+- type: SecondaryMarket
   url: https://forgeglobal.com/tory-burch_stock/

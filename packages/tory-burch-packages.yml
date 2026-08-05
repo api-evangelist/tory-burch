@@ -1,0 +1,46 @@
+generated: '2026-08-05'
+method: searched
+source: registry searches of npm, PyPI, Maven Central, NuGet, RubyGems, Packagist, crates.io and GitHub (2026-08-05)
+result: none
+notes: >-
+  Tory Burch publishes no client SDK, because it publishes no public API. It is a luxury
+  fashion and retail company, not a software vendor. Every registry query below returned
+  zero results or unrelated fuzzy matches on the string "tory". There is no Tory Burch
+  GitHub organisation to hold a first-party library. No `SDKs` pointer is wired in apis.yml
+  and the sdk_count checks are correctly left unearned.
+packages: []
+registries_checked:
+- registry: npm
+  query: toryburch / tory-burch
+  result: >-
+    0 results for "toryburch". The "tory-burch" query returns 20 fuzzy matches on the token
+    "tory" (tory, di-tory, rw-lazy-installer, @6i/ink-tools and similar), none related to
+    the company. The @toryburch scope does not exist.
+- registry: pypi
+  query: toryburch
+  result: 404 - no project under any spelling
+- registry: maven-central
+  query: toryburch
+  result: 0 documents (numFound 0)
+- registry: nuget
+  query: toryburch
+  result: 0 hits
+- registry: rubygems
+  query: toryburch
+  result: 0 results
+- registry: packagist
+  query: toryburch
+  result: 0 results
+- registry: crates.io
+  query: toryburch
+  result: 0 crates
+- registry: github
+  query: orgs/toryburch, orgs/tory-burch, orgs/toryburchllc
+  result: >-
+    404 on all three. Tory Burch operates no public GitHub organisation, so there is no
+    first-party source repository, SDK, CLI or .proto to harvest.
+derived_candidates: []
+derivation_note: >-
+  apis.yml carries no SDK, CLI or SourceCode link to derive candidates from, and the
+  company's documentation surface (client-services pages) describes shipping, returns and
+  payment options rather than any developer integration.
