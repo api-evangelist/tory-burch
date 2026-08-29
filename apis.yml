@@ -16,6 +16,17 @@ description: 'Tory Burch LLC is an American luxury women''s fashion label founde
   for first-party storefront traffic only, exposing no publicly registered proxy. The
   one machine-readable artifact the company does publish is a site-wide llms.txt.'
 url: https://raw.githubusercontent.com/api-evangelist/tory-burch/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://s7.toryburch.com/is/image/ToryBurch/medallion-navy@2x.1200x1200.jpg
 x-type: company
 x-source: harvest:secondary-market
