@@ -46,7 +46,7 @@ x-tier: stub
 x-tier-reason: harvest
 specificationVersion: '0.23'
 created: '2026-08-05'
-modified: '2026-08-05'
+modified: '2026-10-06'
 tags:
 - Company
 - Fashion
@@ -103,6 +103,10 @@ x-coverage:
     status: 404
   checked: '2026-08-05'
 common:
+- url: https://www.toryburch.com/en-us/blog/torys-blog.html
+  type: Blog
+- url: https://blog.toryburch.com/feed/
+  type: BlogRSS
 - type: DomainSecurity
   url: security/tory-burch-domain-security.yml
 - type: WellKnown
